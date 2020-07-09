@@ -1,0 +1,60 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /*display: none;*/
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+#myLoading {
+    position: fixed;
+    z-index: 10000;
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#myLoading .myLoading-chillIcon {
+    background-image: url("./assets/images/Icon/chill-icon-0.jpg");
+    background-size: cover  ;
+    width: 100px;
+    height: 100px;
+    animation-name: mySpin;
+    animation-duration: 4000ms;
+    animation-iteration-count: infinite;
+}
+/*#myLoading .hiddenLoading{*/
+/*    display: none!important;*/
+/*}*/
+/*.showLoading{*/
+/*    display: flex;*/
+/*}*/
+
+@keyframes mySpin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+

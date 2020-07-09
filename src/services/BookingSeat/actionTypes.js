@@ -1,0 +1,2 @@
+export const GET_ROOM_TICKET = "GET_ROOM_TICKET";
+export const ACT_SUBMIT_BOOKING = "ACT_SUBMIT_BOOKING";

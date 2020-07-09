@@ -1,0 +1,1 @@
+export const ACT_REGISTER = "ACT_REGISTER";
