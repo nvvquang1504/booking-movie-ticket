@@ -94,14 +94,6 @@ class ModalAddEdit extends Component {
         });
     }
 
-    // componentDidUpdate() {
-    //     var node = ReactDOM.findDOMNode(this);
-    //
-    //     this.elementBox = node.getBoundingClientRect();
-    //     this.elementHeight = node.clientHeight;
-    //     // Make calculations and stuff
-    // }
-
     render() {
         const {
             values,
@@ -131,15 +123,14 @@ class ModalAddEdit extends Component {
                                 {({field, form}) => {
                                     return (<Form.Control
                                             {...field}//Them field vao moi co touched
-                                            name={'maPhim'}
+                                            name='maPhim'
                                             value={values.maPhim}
                                             onChange={(e,) => {
                                                 this.handleOnChange(e)
                                                 values.maPhim = e.target.value
                                             }}
-                                            type="text"
-                                            // isValid={}
-                                            isInvalid={form.touched.maPhim && form.errors.maPhim}
+                                            type="number"
+                                            isInvalid={form.touched.maPhim && form.values.maPhim === ''}
                                             isValid={form.touched.maPhim && !form.errors.maPhim && values.maPhim !== ''}
                                         >
                                         </Form.Control>
@@ -151,26 +142,34 @@ class ModalAddEdit extends Component {
                         <Form.Group controlId="formAddEditTenPhim">
                             <Form.Label>Tên phim</Form.Label>
                             <Field name='tenPhim'
-                            >
-                                {({field}) => {
-                                    return <Form.Control
-                                        {...field}
-                                        name='tenPhim'
-                                        value={values.tenPhim}
-                                        onChange={(e) => {
-                                            this.handleOnChange(e)
-                                            values.tenPhim = e.target.value
-                                        }} type={'text'}>
-                                    </Form.Control>
+                                   value={values.tenPhim}>
+                                {({field, form}) => {
+                                    return (<Form.Control
+                                            {...field}//Them field vao moi co touched
+                                            name='tenPhim'
+                                            value={values.tenPhim}
+                                            onChange={(e,) => {
+                                                this.handleOnChange(e)
+                                                values.tenPhim = e.target.value
+                                            }}
+                                            type="text"
+                                            isInvalid={form.touched.tenPhim && form.errors.tenPhim}
+                                            isValid={form.touched.tenPhim && !form.errors.tenPhim && values.tenPhim !== ''}
+                                        >
+                                        </Form.Control>
+                                    )
                                 }}
                             </Field>
+                            {touched.tenPhim ? <p>{errors.tenPhim}</p> : ''}
                         </Form.Group>
                         <Form.Group controlId="formAddEditBiDanh">
                             <Form.Label>Bí danh</Form.Label>
-                            <Field name='biDanh'
-                                   value={values.biDanh}>
-                                {() => {
+                            <Field
+                                name='biDanh'
+                                value={values.biDanh}>
+                                {({field, form}) => {
                                     return (<Form.Control
+                                        {...field}
                                         name='biDanh' value={movie.biDanh}
                                         onChange={(e) => {
                                             this.handleOnChange(e)
@@ -183,11 +182,21 @@ class ModalAddEdit extends Component {
                         <Form.Group style={{display: `${this.props.movie ? 'none' : 'block'}`}}
                                     controlId="formAddEditTrailer">
                             <Form.Label>Trailer</Form.Label>
-                            <Form.Control
-                                name='trailer' value={movie.trailer}
-                                onChange={(e) => {
-                                    this.handleOnChange(e)
-                                }} type={'text'}/>
+                            <Field
+                                name='trailer'
+                                value={values.trailer}>
+                                {({field, form}) => {
+                                    return (
+                                        <Form.Control
+                                            {...field}
+                                            name='trailer' value={movie.trailer}
+                                            onChange={(e) => {
+                                                this.handleOnChange(e)
+                                                values.trailer = e.target.trailer
+                                            }} type={'text'}/>
+                                    )
+                                }}
+                            </Field>
                         </Form.Group>
                         <Form.Group controlId="formAddEditMoTa">
                             <Form.Label>Mô tả</Form.Label>

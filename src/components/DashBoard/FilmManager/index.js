@@ -67,7 +67,6 @@ class FilmManager extends Component {
     }
 
     render() {
-
         return (
             <StyledFilmManager>
                 <div style={{textAlign: "left", paddingBottom: "24px"}}>

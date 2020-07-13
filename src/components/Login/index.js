@@ -154,14 +154,12 @@ const LoginFormik = withFormik({
             data: values
         }).then((response) => {
             props.postUser(response.data)
-
         }).catch((error) => {
             setSubmitting(false)
             setFieldError('taiKhoan', error.response.data)
             setFieldError('matKhau', error.response.data)
         });
     }
-
 })
 
 const mapStateToProps = (state) => {

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-
+//ASSETS
 import 'jquery/dist/jquery.min'
 import 'popper.js/dist/popper'
 import 'bootstrap/dist/js/bootstrap.min'

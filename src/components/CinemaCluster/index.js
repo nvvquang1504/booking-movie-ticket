@@ -31,6 +31,9 @@ class CinemaCluster extends Component {
         e.target.classList.remove('normalCluster')
         e.target.classList.add('activeCluster')
     }
+    handleOnclickCinema= (maCumRap) => {
+        console.log(maCumRap)
+    }
     //Render thong tin cum rap
     renderCinemaClusterInfoList = () => {
         let {cinemaClusterInfoList} = this.props;

@@ -39,19 +39,19 @@ class App extends React.Component {
             <BrowserRouter>
                 <div className="App">
                     {/*<React.Fragment>*/}
-                        <Switch>
-                            {showMenuHome(routesHome)}
-                            <Route path={'/login/:param'} exact={false} component={Login}/>
-                            <Route path={'/admin'} exact={true} component={AdminLogin}/>
-                            <Route path={'/dash-board'} exact={false} component={DashBoard}/>
-                            {/*<Route path={'/admin/dashboard'} exact={false}*/}
-                            {/*       component={authenticate && userType === 'QuanTri' ? DashBoard : NotFound}*/}
-                            {/*       render={(props) => {*/}
-                            {/*           return <NavigationBar {...props}/>*/}
-                            {/*       }}*/}
-                            {/*/>*/}
-                            <Route component={NotFound}/>
-                        </Switch>
+                    <Switch>
+                        {showMenuHome(routesHome)}
+                        <Route path={'/login/:param'} exact={false} component={Login}/>
+                        <Route path={'/admin'} exact={true} component={AdminLogin}/>
+                        <Route path={'/dash-board'} exact={false} component={DashBoard}/>
+                        {/*<Route path={'/admin/dashboard'} exact={false}*/}
+                        {/*       component={authenticate && userType === 'QuanTri' ? DashBoard : NotFound}*/}
+                        {/*       render={(props) => {*/}
+                        {/*           return <NavigationBar {...props}/>*/}
+                        {/*       }}*/}
+                        {/*/>*/}
+                        <Route component={NotFound}/>
+                    </Switch>
                     {/*</React.Fragment>*/}
 
                 </div>

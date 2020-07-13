@@ -43,7 +43,6 @@ class ListMovie extends React.Component {
                     <Tabs size='large'
                           tabBarStyle={{border:"none"}}
                           animated={false}
-
                     >
                         <TabPane tab='Phim đang chiếu' key='1'
                         >
