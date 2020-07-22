@@ -3,8 +3,8 @@ import React from 'react';
 import Movie from "./Movie";
 import {connect} from 'react-redux'
 import {getListMovieAPI} from "../../services/ListMovie/action";
-import {Tabs, Row} from "antd"
-import { Element } from 'react-scroll'
+import {Tabs, Row, Pagination} from "antd"
+import {Element} from 'react-scroll'
 
 const {TabPane} = Tabs
 
@@ -13,24 +13,27 @@ class ListMovie extends React.Component {
         super(props);
         this.state = {
             listMovie: [],
-            divListMovie:''
+            fromIndex: 0,
+            toIndex: 8,
+            currPage: 1,
         }
     }
 
     componentDidMount() {
         this.props.getListMovie()
-        let divListMovie=document.getElementById('list-movie')
+    }
+
+    handleChangePages = (page, pageSize) => {
         this.setState({
-            divListMovie
-        }, () => {
-            // console.log(this.state)
+            currPage: page,
+            fromIndex: (page - 1) * pageSize,
+            toIndex: page * pageSize,
         })
     }
 
     render() {
-
         let {listMovie} = this.props
-        let elementMovie = listMovie.map((movie, index) => {
+        let elementMovie = listMovie.slice(this.state.fromIndex, this.state.toIndex).map((movie, index) => {
             return <Movie
                 key={index}
                 movie={movie}
@@ -41,32 +44,44 @@ class ListMovie extends React.Component {
             <StyledList id='list-movie'>
                 <Element name='list-movie'>
                     <Tabs size='large'
-                          tabBarStyle={{border:"none"}}
+                          tabBarStyle={{border: "none"}}
                           animated={false}
                     >
                         <TabPane tab='Phim đang chiếu' key='1'
                         >
                             <div className='container'>
-                                <Row gutter={[{ xs: 8, sm: 16, md: 24, lg: 32 },{ xs: 8, sm: 16, md: 24, lg: 32 }]}
+                                <Row gutter={[{xs: 8, sm: 16, md: 24, lg: 32}, {xs: 8, sm: 16, md: 24, lg: 32}]}
                                      justify="center"
                                      align="middle">
                                     {elementMovie}
                                 </Row>
                             </div>
+                            <Pagination
+                                onChange={this.handleChangePages}
+                                pageSize={8}
+                                total={listMovie.length}
+                                defaultCurrent={1}
+                                current={this.state.currPage}
+                            />
                         </TabPane>
                         <TabPane tab='Phim sắp chiếu' key='2'>
                             <div className='container'>
-                                <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}
+                                <Row gutter={[{xs: 8, sm: 16, md: 24, lg: 32}, {xs: 8, sm: 16, md: 24, lg: 32}]}
                                      justify="center"
                                      align="middle">
                                     {elementMovie}
                                 </Row>
                             </div>
+                            <Pagination
+                                onChange={this.handleChangePages}
+                                pageSize={8}
+                                total={listMovie.length}
+                                defaultCurrent={1}
+                                current={this.state.currPage}
+                            />
                         </TabPane>
                     </Tabs>
                 </Element>
-
-
             </StyledList>
         );
     }

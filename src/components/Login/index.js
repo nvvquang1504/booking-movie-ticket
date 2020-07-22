@@ -34,13 +34,14 @@ class Login extends Component {
             let myLoading = document.getElementById('myLoading')
             myLoading.style.display = 'none';
         }, 2000)
+        console.log(this.props)
     }
     componentWillUnmount() {
         let myLoading = document.getElementById('myLoading')
         myLoading.style.display = 'flex'
     }
     render() {
-        console.log(this.state.maLichChieu)
+        // console.log(this.state.maLichChieu)
         let {
             errors,
             touched,
@@ -132,6 +133,7 @@ class Login extends Component {
 }
 
 const LoginFormik = withFormik({
+
     mapPropsToValues() { // Init form field
         return {
             taiKhoan: '',
