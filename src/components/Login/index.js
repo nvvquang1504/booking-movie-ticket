@@ -16,6 +16,7 @@ class Login extends Component {
             isLoadingScreen: false,
         }
     }
+
     static getDerivedStateFromProps(nextProps, prevState) {
         console.log(nextProps.match.params.param)
         let {authenticate} = prevState;
@@ -29,17 +30,20 @@ class Login extends Component {
             return {authenticate: nextProps.user.authenticate};
         } else return null;
     }
+
     componentDidMount() {
         setTimeout(() => {
             let myLoading = document.getElementById('myLoading')
             myLoading.style.display = 'none';
         }, 2000)
-        console.log(this.props)
+        // this.props.setFieldsValue('taiKhoan','123@admin')
     }
+
     componentWillUnmount() {
         let myLoading = document.getElementById('myLoading')
         myLoading.style.display = 'flex'
     }
+
     render() {
         // console.log(this.state.maLichChieu)
         let {
@@ -47,7 +51,7 @@ class Login extends Component {
             touched,
             handleSubmit,
             isSubmitting,
-            handleChange
+            handleChange,
         } = this.props
         return (
             <StyledLogin style={{height: '100vh'}}>
@@ -80,6 +84,7 @@ class Login extends Component {
                                                         onChange={handleChange}
                                                         className='form-control'
                                                         placeholder="username"
+                                                        style={{color: 'black'}}
                                                     />)}
                                             </Field>
                                         </div>
@@ -99,6 +104,7 @@ class Login extends Component {
                                                         type='password'
                                                         className="form-control"
                                                         placeholder="password"
+                                                        style={{color: 'black'}}
                                                     />
                                                 )}
                                             </Field>
@@ -136,8 +142,8 @@ const LoginFormik = withFormik({
 
     mapPropsToValues() { // Init form field
         return {
-            taiKhoan: '',
-            matKhau: '',
+            taiKhoan: "123@admin",
+            matKhau: 123123,
         }
     },
     validationSchema: Yup.object().shape({ // Validate form field

@@ -21,7 +21,7 @@ class App extends React.Component {
     }
 
     render() {
-        const {authenticate, userType} = this.props
+        // const {authenticate, userType} = this.props
         let showMenuHome = (routes) => {
             if (routes && routes.length > 0) {
                 return routes.map((route, index) => {

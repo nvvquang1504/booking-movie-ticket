@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import NavigationBar from "../NavigationBar";
 import {Link} from "react-router-dom";
 import BgDetailMovie from '../../assets/images/bg-detail-movie.jpg'
-import {Rate} from 'antd'
+import {Rate, Pagination} from 'antd'
 
 class MovieDetail extends React.Component {
     constructor(props) {
@@ -13,8 +13,13 @@ class MovieDetail extends React.Component {
         this.state = {
             movieDetail: {},
             isLoadingScreen: true,
+            fromIndex: 0,
+            toIndex: 10,
+            currPage: 1,
+            total: 0,
         }
     }
+
     componentDidMount() {
         setTimeout(() => {
             let myLoading = document.getElementById('myLoading')
@@ -25,20 +30,30 @@ class MovieDetail extends React.Component {
         }, 2000)
         this.props.getDetailMovie(this.props.match.params.id)
     }
+
     componentWillUnmount() {
         let myLoading = document.getElementById('myLoading')
         myLoading.style.display = 'flex'
     }
+
     UNSAFE_componentWillReceiveProps(nextProps) {
         this.setState({
             movieDetail: nextProps.movieDetail,
+            total: nextProps.movieDetail.lichChieu.length,
         });
     }
 
+    handleChangePages = (page, pageSize) => {
+        this.setState({
+            currPage: page,
+            fromIndex: (page - 1) * pageSize,
+            toIndex: page * pageSize,
+        })
+    }
     renderShowTimes = () => {
         const {movieDetail} = this.state
         if (movieDetail.lichChieu) {
-            return movieDetail.lichChieu.map((item, index) => {
+            return movieDetail.lichChieu.slice(this.state.fromIndex, this.state.toIndex).map((item, index) => {
                 return (
                     <tr key={index}>
                         <td className='text-left'>{item.thongTinRap.tenCumRap}</td>
@@ -57,8 +72,10 @@ class MovieDetail extends React.Component {
             })
         }
     }
+
     render() {
-        let {movieDetail} = this.state;
+        const {movieDetail} = this.state;
+        console.log(movieDetail)
         return (
             <StyledMovieDetail>
                 <NavigationBar/>
@@ -114,12 +131,23 @@ class MovieDetail extends React.Component {
                             {this.renderShowTimes()}
                             </tbody>
                         </table>
+                        <div style={{margin:"30px auto"}}>
+                            <Pagination
+                                onChange={this.handleChangePages}
+                                pageSize={10}
+                                total={this.state.total}
+                                defaultCurrent={1}
+                                current={this.state.currPage}
+                                showSizeChanger={false}
+                            />
+                        </div>
                     </div>
                 </div>
             </StyledMovieDetail>
         );
     }
 }
+
 const mapStateToProps = (state) => {
     return {
         movieDetail: state.MovieDetailReducer.movieDetail
